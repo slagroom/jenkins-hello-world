@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+[ -z "$JENKINS_USERNAME" ] && read -p "username: " JENKINS_USERNAME
+[ -z "$JENKINS_APITOKEN" ] && { read -p "API token: " -s JENKINS_APITOKEN; echo ""; }
+[ -z "$JENKINS_JOB" ] && read -p "job name: " JENKINS_JOB
+[ -z "$JENKINS_TOKENNAME" ] && read -p "token name: " JENKINS_TOKENNAME
+
+curl -i -u "$JENKINS_USERNAME:$JENKINS_APITOKEN" \
+    "http://127.0.0.1:8080/job/$JENKINS_JOB/build?token=$JENKINS_TOKENNAME"
+
